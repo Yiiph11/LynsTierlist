@@ -1,0 +1,1842 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Lyns Tier List | Trio Edition</title>
+    <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1998/1998624.png">
+    <style>
+        /* -----------------------------------------------
+            RESET + ESTILOS BASE (ELEGANTE + SAKURA)
+        ----------------------------------------------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a1428 0%, #2a1a2e 100%);
+            font-family: 'Poppins', 'Segoe UI', 'Inter', system-ui, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #f0eef7;
+        }
+
+        /* fondo con flores de cerezo */
+        .sakura-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            background: radial-gradient(circle, #ffb7c5, #ff8da1);
+            width: 12px;
+            height: 12px;
+            border-radius: 80% 0 80% 0;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            filter: blur(0.3px);
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0.8; }
+            80% { opacity: 0.5; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* gradiente elegante de fondo */
+        .elegant-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at 30% 40%, rgba(80, 50, 120, 0.3), rgba(20, 15, 35, 0.95));
+            z-index: -1;
+        }
+
+        /* contenedor principal */
+        .sakura-container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+
+        /* header elegante con imagen */
+        .elegant-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: rgba(30, 25, 45, 0.65);
+            backdrop-filter: blur(16px);
+            border-radius: 60px;
+            padding: 0.8rem 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 160, 180, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-sakura {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-sakura img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-sakura h1 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #FFB7C5, #E8A0B4, #C9A0D4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .logo-sakura p {
+            font-size: 0.65rem;
+            color: #d4b0d4;
+        }
+
+        .right-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .discord-btn {
+            background: linear-gradient(145deg, #5865F2, #4752c4);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(88, 101, 242, 0.3);
+        }
+
+        .donate-btn {
+            background: linear-gradient(145deg, #ffb347, #ff8c00);
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 2px 8px rgba(255, 140, 0, 0.3);
+        }
+
+        .search-elegant {
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid #FFB7C5;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            color: #FFE4E8;
+            width: 200px;
+        }
+
+        .admin-visible-btn {
+            background: linear-gradient(135deg, #ff3366, #ff6b3d);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 700px) {
+            .search-elegant { width: 140px; }
+            .elegant-header { flex-direction: column; text-align: center; }
+            .logo-sakura { justify-content: center; }
+        }
+
+        /* ========== BOTONES DE EDICIÓN (TRES VERSIONES) ========== */
+        .edition-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .edition-btn {
+            background: rgba(30, 25, 45, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 60px;
+            border: 1px solid #FFB7C5;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .edition-btn img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .edition-btn.active {
+            background: linear-gradient(135deg, #FFB7C5, #D9A0C9);
+            color: #1a0f2a;
+            border-color: #FFE0E8;
+            box-shadow: 0 0 20px #FFB7C5;
+            transform: scale(1.02);
+        }
+
+        .edition-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 183, 197, 0.3);
+        }
+
+        /* banner promocional con imagen - GRANDE Y SIMÉTRICO */
+        .promo-banner {
+            background: linear-gradient(135deg, #2a1a3e, #1a0f2a);
+            border-radius: 32px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border: 1px solid rgba(255, 160, 180, 0.3);
+        }
+
+        .promo-text {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            flex: 2;
+        }
+
+        .promo-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .promo-image img {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            border-radius: 20px;
+            object-fit: contain;
+        }
+
+        /* sección de creadores */
+        .creators-section {
+            background: rgba(30, 25, 45, 0.5);
+            backdrop-filter: blur(8px);
+            border-radius: 32px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 183, 197, 0.3);
+        }
+
+        .creators-title {
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: #FFB7C5;
+        }
+
+        .creators-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .creator-card {
+            background: rgba(20, 15, 35, 0.7);
+            border-radius: 24px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 183, 197, 0.2);
+        }
+
+        .creator-card:hover {
+            transform: translateY(-2px);
+            border-color: #FFB7C5;
+        }
+
+        .creator-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #FFB7C5;
+            object-fit: cover;
+        }
+
+        .creator-info h4 {
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .creator-info p {
+            font-size: 0.6rem;
+            color: #d4b0d4;
+        }
+
+        /* modalidades estilo gemas */
+        .gem-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .gem {
+            background: rgba(40, 30, 55, 0.7);
+            backdrop-filter: blur(4px);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #FFB7C5;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: 500;
+            font-size: 0.7rem;
+        }
+
+        .gem.active {
+            background: linear-gradient(135deg, #FFB7C5, #D9A0C9);
+            color: #1a0f2a;
+            border-color: #FFE0E8;
+            box-shadow: 0 0 12px #FFB7C5;
+        }
+
+        /* grid de cartas 3D */
+        .cards-grid-3d {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            perspective: 1000px;
+        }
+
+        /* ESTILOS ESPECIALES PARA EL PODIO (TOP 1, 2, 3) */
+        .crystal-card.podium-1 {
+            background: linear-gradient(145deg, rgba(255, 215, 0, 0.25), rgba(255, 180, 0, 0.15));
+            border: 2px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            transform: scale(1.02);
+        }
+
+        .crystal-card.podium-2 {
+            background: linear-gradient(145deg, rgba(192, 192, 192, 0.25), rgba(150, 150, 150, 0.15));
+            border: 2px solid #C0C0C0;
+            box-shadow: 0 0 25px rgba(192, 192, 192, 0.4);
+        }
+
+        .crystal-card.podium-3 {
+            background: linear-gradient(145deg, rgba(205, 127, 50, 0.25), rgba(180, 100, 30, 0.15));
+            border: 2px solid #CD7F32;
+            box-shadow: 0 0 20px rgba(205, 127, 50, 0.4);
+        }
+
+        .podium-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-shadow: 0 0 10px currentColor;
+            z-index: 10;
+        }
+
+        .crystal-card {
+            position: relative;
+            background: rgba(35, 28, 48, 0.75);
+            backdrop-filter: blur(12px);
+            border-radius: 28px;
+            padding: 1rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform-style: preserve-3d;
+            cursor: pointer;
+            border: 1px solid rgba(255, 183, 197, 0.4);
+            box-shadow: 0 15px 25px -12px rgba(0, 0, 0, 0.4);
+        }
+
+        .crystal-card:hover {
+            transform: translateY(-8px) rotateX(3deg) rotateY(2deg);
+            border-color: #FFB7C5;
+            box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Skin 3D de cuerpo completo para el podio - TAMAÑO REDUCIDO */
+        .podium-skin {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: -1rem -1rem 0 -1rem;
+            padding-top: 0.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .podium-skin img {
+            width: 100%;
+            max-width: 130px;
+            height: auto;
+            image-rendering: crisp-edges;
+            filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
+        }
+
+        /* Estilo normal para los que no están en podio */
+        .card-top {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .player-avatar-sakura {
+            width: 60px;
+            height: 60px;
+            border-radius: 24px;
+            border: 2px solid #FFB7C5;
+            object-fit: cover;
+            transition: 0.2s;
+        }
+
+        /* Avatar más grande para el podio */
+        .crystal-card.podium-1 .player-avatar-sakura {
+            width: 85px;
+            height: 85px;
+            border-radius: 30px;
+            border: 3px solid #FFD700;
+        }
+
+        .crystal-card.podium-2 .player-avatar-sakura {
+            width: 75px;
+            height: 75px;
+            border-radius: 28px;
+            border: 3px solid #C0C0C0;
+        }
+
+        .crystal-card.podium-3 .player-avatar-sakura {
+            width: 70px;
+            height: 70px;
+            border-radius: 26px;
+            border: 3px solid #CD7F32;
+        }
+
+        /* Nombre reluciente para el podio */
+        .podium-name {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 2s infinite;
+            font-size: 1.2rem !important;
+        }
+
+        @keyframes shine {
+            0% { background-position: -200%; }
+            100% { background-position: 200%; }
+        }
+
+        .crystal-card.podium-1 .player-name {
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FFD700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: shine 2s infinite;
+            font-size: 1.2rem;
+        }
+
+        .crystal-card.podium-2 .player-name {
+            background: linear-gradient(135deg, #E0E0E0, #A0A0A0, #E0E0E0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.1rem;
+        }
+
+        .crystal-card.podium-3 .player-name {
+            background: linear-gradient(135deg, #E8A87C, #CD7F32, #E8A87C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.05rem;
+        }
+
+        .rank-sakura {
+            display: inline-block;
+            background: rgba(255, 183, 197, 0.2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 600;
+        }
+
+        /* colores por rango */
+        .rank-LY1 { color: #FFD700; text-shadow: 0 0 6px #FFD700; }
+        .rank-LY2 { color: #C0C0C0; text-shadow: 0 0 4px #C0C0C0; }
+        .rank-LY3 { color: #CD7F32; text-shadow: 0 0 4px #CD7F32; }
+        .rank-LY4 { color: #6A8E9E; text-shadow: 0 0 4px #6A8E9E; }
+        .rank-LY5 { color: #4A6A8B; text-shadow: 0 0 4px #4A6A8B; }
+        .rank-LA1 { color: #B8A9D4; text-shadow: 0 0 4px #B8A9D4; }
+        .rank-LA2 { color: #9B8EAF; text-shadow: 0 0 4px #9B8EAF; }
+        .rank-LA3 { color: #7E6E8E; text-shadow: 0 0 4px #7E6E8E; }
+        .rank-LA4 { color: #6A5A7A; text-shadow: 0 0 4px #6A5A7A; }
+        .rank-LA5 { color: #5A4A6A; text-shadow: 0 0 4px #5A4A6A; }
+
+        .points-LY1 { color: #FFD700; font-weight: bold; }
+        .points-LY2 { color: #C0C0C0; font-weight: bold; }
+        .points-LY3 { color: #CD7F32; font-weight: bold; }
+        .points-LY4 { color: #6A8E9E; font-weight: bold; }
+        .points-LY5 { color: #4A6A8B; font-weight: bold; }
+        .points-LA1 { color: #B8A9D4; font-weight: bold; }
+        .points-LA2 { color: #9B8EAF; font-weight: bold; }
+        .points-LA3 { color: #7E6E8E; font-weight: bold; }
+        .points-LA4 { color: #6A5A7A; font-weight: bold; }
+        .points-LA5 { color: #5A4A6A; font-weight: bold; }
+
+        /* espacio para lore y frases */
+        .lore-box {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 0.6rem;
+            margin-top: 0.8rem;
+            font-size: 0.65rem;
+            font-style: italic;
+            border-left: 3px solid #FFB7C5;
+        }
+
+        .quote-text {
+            color: #E8D0E8;
+            font-size: 0.65rem;
+            line-height: 1.3;
+        }
+
+        .quote-author {
+            font-size: 0.55rem;
+            color: #FFB7C5;
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+
+        /* imágenes de usuario en cada carta */
+        .user-images-row {
+            display: flex;
+            gap: 0.6rem;
+            justify-content: flex-start;
+            margin-top: 0.8rem;
+        }
+
+        .user-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            background: rgba(255, 183, 197, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .user-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* panel lateral elegante */
+        .elegant-panel {
+            position: fixed;
+            top: 10%;
+            right: 1rem;
+            width: 340px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background: rgba(25, 20, 38, 0.95);
+            backdrop-filter: blur(24px);
+            border-radius: 32px;
+            border: 1px solid #FFB7C5;
+            padding: 1.2rem;
+            transition: 0.2s;
+            z-index: 30;
+            box-shadow: 0 20px 35px -12px black;
+        }
+
+        .elegant-panel::-webkit-scrollbar { width: 4px; }
+        .elegant-panel::-webkit-scrollbar-track { background: #2a1a3e; border-radius: 10px; }
+        .elegant-panel::-webkit-scrollbar-thumb { background: #FFB7C5; border-radius: 10px; }
+
+        @media (max-width: 900px) {
+            .elegant-panel {
+                position: static;
+                width: auto;
+                margin-top: 1.5rem;
+                max-height: none;
+            }
+        }
+
+        .close-panel {
+            float: right;
+            background: none;
+            border: none;
+            color: #FFB7C5;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .footer-sakura {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.6rem;
+            color: #b89ac0;
+        }
+
+        .footer-images {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .footer-images img {
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            opacity: 0.7;
+        }
+
+        /* MODAL ADMIN MEJORADO */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, #1a1a2a, #0f0f1a);
+            border-radius: 24px;
+            padding: 1.5rem;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #ff6b3d;
+            box-shadow: 0 0 30px rgba(255, 107, 61, 0.3);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ff6b3d;
+        }
+
+        .modal input, .modal select, .modal textarea {
+            width: 100%;
+            padding: 0.6rem;
+            margin: 0.4rem 0;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #ff6b3d;
+            border-radius: 12px;
+            color: white;
+            font-family: inherit;
+        }
+
+        .modal textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .modal button {
+            background: linear-gradient(135deg, #ff3366, #ff6b3d);
+            border: none;
+            padding: 0.6rem;
+            border-radius: 40px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 0.5rem;
+        }
+
+        .close-modal {
+            float: right;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: #ff6b3d;
+        }
+
+        .delete-player-btn {
+            background: linear-gradient(135deg, #ff3366, #cc0000);
+        }
+
+        .reset-player-btn {
+            background: linear-gradient(135deg, #ffaa33, #ff8800);
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            background: rgba(255, 51, 102, 0.2);
+            border: 1px solid #ff6b3d;
+            padding: 0.4rem 0.8rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .admin-tab.active {
+            background: linear-gradient(135deg, #ff3366, #ff6b3d);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ffb347;
+        }
+
+        /* botón admin oculto */
+        #hiddenAdminBtn {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 10px;
+            height: 10px;
+            background: transparent;
+            cursor: pointer;
+            z-index: 9999;
+            opacity: 0.3;
+            border-radius: 50%;
+            transition: 0.2s;
+        }
+        
+        #hiddenAdminBtn:hover {
+            opacity: 0.8;
+            background: #ff3366;
+        }
+    </style>
+</head>
+<body>
+<div class="sakura-bg" id="sakuraBg"></div>
+<div class="elegant-gradient"></div>
+
+<div class="sakura-container">
+    <div class="elegant-header">
+        <div class="logo-sakura">
+            <img src="iconhea.jpg" alt="logo">
+            <div>
+                <h1>✦ LYNS TIER LIST ✦</h1>
+                <p>☀️ where stars are born ☾</p>
+            </div>
+        </div>
+        <div class="right-header">
+            <button class="discord-btn" id="discordBtn">🌸 DISCORD</button>
+            <button class="donate-btn" id="donateBtn">💝 DONAR</button>
+            <input type="text" class="search-elegant" id="searchInput" placeholder="buscar...">
+            <div id="adminButtonContainer"></div>
+        </div>
+    </div>
+
+    <!-- BOTONES DE EDICIÓN -->
+    <div class="edition-buttons">
+        <div class="edition-btn" data-edition="java18">
+            <img src="iconMC.png" alt="mc">
+            <span>⚔️ JAVA 1.8</span>
+        </div>
+        <div class="edition-btn active" data-edition="java19">
+            <img src="iconMC.png" alt="mc">
+            <span>🛡️ JAVA 1.9+</span>
+        </div>
+        <div class="edition-btn" data-edition="bedrock">
+            <img src="iconMC.png" alt="mc">
+            <span>🪨 BEDROCK</span>
+        </div>
+    </div>
+
+    <!-- BANNER PROMOCIONAL -->
+    <div class="promo-banner">
+        <div class="promo-text">
+            📊 LYNS TIER LIST · SISTEMA DE RANGOS<br>
+            🏆 3 EDICIONES: Java 1.8 · Java 1.9+ · Bedrock<br>
+            ⭐ Rangos: LY1 (55pts) → LA5 (0pts)<br>
+            🧪 Testeos por el equipo @testers
+        </div>
+        <div class="promo-image">
+            <img src="bannerlyns.jpg" alt="banner">
+        </div>
+    </div>
+
+    <!-- SECCIÓN DE CREADORES -->
+    <div class="creators-section">
+        <div class="creators-title">🌸 CREADORES DEL SERVIDOR 🌸</div>
+        <div class="creators-grid">
+            <div class="creator-card"><img class="creator-avatar" src="https://mc-heads.net/avatar/yiiph11/64"><div class="creator-info"><h4>Yiiph11</h4><p>Fundador · Lead Dev</p></div></div>
+            <div class="creator-card"><img class="creator-avatar" src="https://mc-heads.net/avatar/Mandi_39/64"><div class="creator-info"><h4>Mandi_39</h4><p>Co-Fundador</p></div></div>
+            <div class="creator-card"><img class="creator-avatar" src="https://mc-heads.net/avatar/1mMikeVro/64"><div class="creator-info"><h4>1mMikeVro</h4><p>Admin</p></div></div>
+            <div class="creator-card"><img class="creator-avatar" src="https://mc-heads.net/avatar/Byyuna/64"><div class="creator-info"><h4>Byyuna</h4><p>Mod</p></div></div>
+        </div>
+    </div>
+
+    <div class="gem-bar" id="modesBar"></div>
+
+    <div class="cards-grid-3d" id="cardsGrid"></div>
+
+    <div class="elegant-panel" id="detailPanel" style="display: none;">
+        <button class="close-panel" id="closePanelBtn">✖</button>
+        <div id="panelDetailContent">✨ selecciona una estrella ✨</div>
+    </div>
+
+    <div class="footer-sakura">
+        <div>✨ CREADOR: yiiph11 · Dueño y creador de "The Light Is Amazing" y de la Lyns Tier List ✨</div>
+        <div class="footer-images">
+            <img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png"><img src="https://cdn-icons-png.flaticon.com/512/733/733609.png"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968315.png"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998624.png">
+        </div>
+    </div>
+</div>
+
+<!-- MODAL ADMIN MEJORADO -->
+<div id="adminModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" id="closeModal">&times;</span>
+        
+        <div class="admin-tabs">
+            <div class="admin-tab active" data-tab="edit">✏️ EDITAR</div>
+            <div class="admin-tab" data-tab="create">✨ CREAR</div>
+            <div class="admin-tab" data-tab="advanced">⚙️ AVANZADO</div>
+            <div class="admin-tab" data-tab="stats">📊 ESTADÍSTICAS</div>
+        </div>
+        
+        <!-- Pestaña EDITAR -->
+        <div id="tab-edit" class="admin-tab-content">
+            <div class="modal-header">✏️ EDITAR JUGADOR</div>
+            <select id="editionSelect">
+                <option value="java18">JAVA 1.8</option>
+                <option value="java19">JAVA 1.9+</option>
+                <option value="bedrock">BEDROCK</option>
+            </select>
+            <select id="playerSelect"></select>
+            <select id="modalidadSelect"></select>
+            <select id="rangoSelect"></select>
+            <button id="saveBtn">💾 GUARDAR RANGO</button>
+            
+            <hr style="margin: 1rem 0; border-color: #ff6b3d;">
+            
+            <div class="modal-header" style="font-size: 1rem;">📝 EDITAR LORE Y FRASE</div>
+            <textarea id="editLore" placeholder="Lore del jugador..."></textarea>
+            <textarea id="editFrase" placeholder="Frase del jugador..."></textarea>
+            <input type="text" id="editRegion" placeholder="Región">
+            <input type="text" id="editAvatar" placeholder="URL del avatar (opcional)">
+            <button id="saveProfileBtn">💾 GUARDAR PERFIL</button>
+            
+            <button id="resetPlayerBtn" class="reset-player-btn">🔄 RESET JUGADOR</button>
+            <button id="deleteBtn" class="delete-player-btn">🗑️ ELIMINAR JUGADOR</button>
+        </div>
+        
+        <!-- Pestaña CREAR -->
+        <div id="tab-create" class="admin-tab-content" style="display: none;">
+            <div class="modal-header">✨ CREAR NUEVO JUGADOR</div>
+            <select id="createEditionSelect">
+                <option value="java18">JAVA 1.8</option>
+                <option value="java19">JAVA 1.9+</option>
+                <option value="bedrock">BEDROCK</option>
+            </select>
+            <input type="text" id="newPlayerName" placeholder="Nombre">
+            <textarea id="newPlayerLore" placeholder="Lore (opcional)"></textarea>
+            <textarea id="newPlayerFrase" placeholder="Frase (opcional)"></textarea>
+            <input type="text" id="newPlayerRegion" placeholder="Región (ej: ★, NA, EU)" value="★">
+            <select id="newModalidadSelect"></select>
+            <select id="newRangoSelect"></select>
+            <button id="confirmCreateBtn">✅ CREAR JUGADOR</button>
+        </div>
+        
+        <!-- Pestaña AVANZADO -->
+        <div id="tab-advanced" class="admin-tab-content" style="display: none;">
+            <div class="modal-header">⚙️ OPCIONES AVANZADAS</div>
+            <button id="exportDataBtn">📤 EXPORTAR DATOS (JSON)</button>
+            <button id="importDataBtn" style="background: #4CAF50;">📥 IMPORTAR DATOS</button>
+            <input type="file" id="importFile" style="display: none;" accept=".json">
+            <button id="backupDataBtn" style="background: #2196F3;">💾 CREAR BACKUP</button>
+            <button id="restoreBackupBtn" style="background: #ff9800;">🔄 RESTAURAR BACKUP</button>
+            <hr>
+            <div class="modal-header" style="font-size: 1rem;">📋 HISTORIAL DE CAMBIOS</div>
+            <div id="changeLog" style="max-height: 200px; overflow-y: auto; font-size: 0.7rem; background: rgba(0,0,0,0.3); padding: 0.5rem; border-radius: 8px;">
+                No hay cambios registrados aún
+            </div>
+        </div>
+        
+        <!-- Pestaña ESTADÍSTICAS -->
+        <div id="tab-stats" class="admin-tab-content" style="display: none;">
+            <div class="modal-header">📊 ESTADÍSTICAS DEL SERVIDOR</div>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">Cargando...</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="hiddenAdminBtn"></div>
+
+<!-- CONEXIÓN A SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Configuración de Supabase
+  const SUPABASE_URL = 'https://lgkhyiipvlsoqgupxcxy.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_iNBCPFPgKWR-ovfm94LMWA_GC92frl6';
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+</script>
+
+<script>
+    // ==================== CONFIGURACIÓN DE MODALIDADES POR EDICIÓN ====================
+    const MODALIDADES_JAVA18 = ["OVERALL", "gapple", "fireball", "pearl", "uhc", "sumo", "potion", "combo", "soup"];
+    const MODALIDADES_STANDARD = ["OVERALL", "UHC", "POT", "NETHOP", "VANILLA", "SWORD", "AXE", "MACE", "LTMS", "SMP"];
+    const MODALIDADES_BEDROCK = ["OVERALL", "Boxing", "NoDebuff", "Sumo", "The Bridge", "Gapple", "BuildUHC", "Midfight", "Combo"];
+    
+    const MODE_NAMES_JAVA18 = {
+        OVERALL: "🌟 TOTAL", gapple: "🍎 GAPPLE", fireball: "🔥 FIREBALL", pearl: "💎 PEARL",
+        uhc: "🏹 UHC", sumo: "🥋 SUMO", potion: "🧪 POTION", combo: "⚡ COMBO", soup: "🥣 SOUP"
+    };
+    
+    const MODE_NAMES_STANDARD = {
+        OVERALL: "🌟 TOTAL", UHC: "🏹 UHC", POT: "🧪 POT", NETHOP: "🔥 NETHOP",
+        VANILLA: "⚔️ VANILLA", SWORD: "🗡️ SWORD", AXE: "🪓 AXE", MACE: "🔨 MACE",
+        LTMS: "✨ LTMS", SMP: "🏡 SMP"
+    };
+    
+    const MODE_NAMES_BEDROCK = {
+        OVERALL: "🌟 TOTAL", Boxing: "🥊 BOXING", NoDebuff: "🧪 NODEBUFF", Sumo: "🥋 SUMO",
+        "The Bridge": "🌉 THE BRIDGE", Gapple: "🍎 GAPPLE", BuildUHC: "🏗️ BUILDUHC",
+        Midfight: "⚔️ MIDFIGHT", Combo: "⚡ COMBO"
+    };
+    
+    const RANGO_INFO = { 
+        LY1:{simbolo:"☀️",nombre:"LY1",clase:"rank-ly1",puntos:55}, 
+        LY2:{simbolo:"☀️",nombre:"LY2",clase:"rank-ly2",puntos:44}, 
+        LY3:{simbolo:"☀️",nombre:"LY3",clase:"rank-ly3",puntos:33}, 
+        LY4:{simbolo:"☀️",nombre:"LY4",clase:"rank-ly4",puntos:22}, 
+        LY5:{simbolo:"☀️",nombre:"LY5",clase:"rank-ly5",puntos:11}, 
+        LA1:{simbolo:"☾",nombre:"LA1",clase:"rank-la1",puntos:7}, 
+        LA2:{simbolo:"☾",nombre:"LA2",clase:"rank-la2",puntos:5}, 
+        LA3:{simbolo:"☾",nombre:"LA3",clase:"rank-la3",puntos:3}, 
+        LA4:{simbolo:"☾",nombre:"LA4",clase:"rank-la4",puntos:1}, 
+        LA5:{simbolo:"☾",nombre:"LA5",clase:"rank-la5",puntos:0} 
+    };
+    
+    const RANK_SAKURA = { 
+        LY1:"☀️✨✨✨✨", LY2:"☀️✨✨✨", LY3:"☀️✨✨", LY4:"☀️✨", LY5:"☀️", 
+        LA1:"☾🌸🌸🌸🌸", LA2:"☾🌸🌸🌸", LA3:"☾🌸🌸", LA4:"☾🌸", LA5:"☾" 
+    };
+
+    // ==================== DATOS POR EDICIÓN ====================
+    let java18Data = [];
+    let java19Data = [];
+    let bedrockData = [];
+    
+    // Jugador de prueba para Java 1.8 y Bedrock
+    const TEST_PLAYER = {
+        nombre: "yiiph11",
+        avatar: "https://mc-heads.net/avatar/yiiph11/100",
+        region: "★",
+        edition: "",
+        lore: "Fundador y creador de la Lyns Tier List",
+        frase: "«Con esfuerzo, todo es posible»",
+        rangos: {
+            OVERALL: "LY1", gapple: "LY2", fireball: "LY3", pearl: "LY4", uhc: "LY5",
+            sumo: "LA1", potion: "LA2", combo: "LA3", soup: "LA4"
+        }
+    };
+    
+    let currentEdition = "java19";
+    let currentData = java19Data;
+    let currentModalidades = MODALIDADES_STANDARD;
+    let currentModeNames = MODE_NAMES_STANDARD;
+    let modalidadActual = "OVERALL";
+    let selectedPlayer = null;
+    let isAdmin = false;
+    let secretCodeBuffer = "";
+    let changeLog = [];
+
+    function getPlayerPoints(player) {
+        if (modalidadActual === "OVERALL") {
+            let total = 0;
+            for (const [mod, rango] of Object.entries(player.rangos)) {
+                if (mod !== "OVERALL") {
+                    total += RANGO_INFO[rango]?.puntos || 0;
+                }
+            }
+            return total;
+        }
+        const rango = player.rangos[modalidadActual] || "LA5";
+        return RANGO_INFO[rango]?.puntos || 0;
+    }
+
+    function getPlayerRank(player) {
+        if (modalidadActual === "OVERALL") return null;
+        return player.rangos[modalidadActual] || "LA5";
+    }
+
+    function getRankColorClass(rank) { return rank ? `rank-${rank}` : ""; }
+    function getPointsColorClass(rank) { return rank ? `points-${rank}` : "points-LY1"; }
+
+    function updateModesByEdition(edition) {
+        if (edition === "java18") {
+            currentModalidades = MODALIDADES_JAVA18;
+            currentModeNames = MODE_NAMES_JAVA18;
+        } else if (edition === "bedrock") {
+            currentModalidades = MODALIDADES_BEDROCK;
+            currentModeNames = MODE_NAMES_BEDROCK;
+        } else {
+            currentModalidades = MODALIDADES_STANDARD;
+            currentModeNames = MODE_NAMES_STANDARD;
+        }
+        modalidadActual = "OVERALL";
+        loadModes();
+        renderCards();
+    }
+
+    function renderCards() {
+        const container = document.getElementById("cardsGrid");
+        if (!container) return;
+        const sorted = [...currentData].sort((a,b) => getPlayerPoints(b) - getPlayerPoints(a));
+        container.innerHTML = "";
+        for (let i = 0; i < sorted.length; i++) {
+            const p = sorted[i];
+            const rankKey = getPlayerRank(p);
+            const starsVisual = rankKey ? (RANK_SAKURA[rankKey] || "☾") : "🌟";
+            const puntos = getPlayerPoints(p);
+            const position = i+1;
+            const rankColorClass = rankKey ? getRankColorClass(rankKey) : "";
+            const pointsColorClass = rankKey ? getPointsColorClass(rankKey) : "points-LY1";
+            
+            let podiumClass = "";
+            let medalIcon = "";
+            if (position === 1) {
+                podiumClass = "podium-1";
+                medalIcon = "🥇";
+            } else if (position === 2) {
+                podiumClass = "podium-2";
+                medalIcon = "🥈";
+            } else if (position === 3) {
+                podiumClass = "podium-3";
+                medalIcon = "🥉";
+            }
+            
+            const card = document.createElement("div");
+            card.className = `crystal-card ${podiumClass}`;
+            
+            if (position <= 3) {
+                card.innerHTML = `
+                    ${medalIcon ? `<div class="podium-number">${medalIcon}</div>` : ''}
+                    <div class="podium-skin">
+                        <img src="https://mc-heads.net/body/${p.nombre}" alt="${p.nombre} skin 3D" loading="lazy">
+                    </div>
+                    <div style="text-align:center; margin-top:0.5rem;">
+                        <div style="font-weight:bold; font-size:1.1rem;" class="${position <= 3 ? 'podium-name' : ''}">${p.nombre}</div>
+                        <div class="rank-sakura ${rankColorClass}">#${position} · ${rankKey || "OVERALL"}</div>
+                    </div>
+                    <div style="margin:0.5rem 0; text-align:center;">
+                        <span class="rank-sakura ${rankColorClass}">${starsVisual}</span>
+                        <span class="${pointsColorClass}" style="margin-left:0.5rem;">🌸 ${puntos} pts</span>
+                    </div>
+                    <div style="font-size:0.65rem; color:#d4b0d4; text-align:center;">${modalidadActual === "OVERALL" ? "★ cosmos elegante" : (currentModeNames[modalidadActual] || modalidadActual)}</div>
+                    <div class="lore-box">
+                        <div class="quote-text">✨ ${p.lore || "Un alma errante en busca de gloria..."}</div>
+                        <div class="quote-author">${p.frase || "— Sin registrar"}</div>
+                    </div>
+                    <div class="user-images-row" style="justify-content:center;">
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/733/733609.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968315.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998624.png"></div>
+                    </div>
+                `;
+            } else {
+                card.innerHTML = `
+                    <div class="card-top">
+                        <img src="${p.avatar}" class="player-avatar-sakura">
+                        <div>
+                            <div style="font-weight:bold; font-size:1rem;">${p.nombre}</div>
+                            <div class="rank-sakura ${rankColorClass}">#${position} · ${rankKey || "OVERALL"}</div>
+                        </div>
+                    </div>
+                    <div style="margin:0.5rem 0;">
+                        <span class="rank-sakura ${rankColorClass}">${starsVisual}</span>
+                        <span style="float:right;" class="${pointsColorClass}">🌸 ${puntos} pts</span>
+                    </div>
+                    <div style="font-size:0.65rem; color:#d4b0d4;">${modalidadActual === "OVERALL" ? "★ cosmos elegante" : (currentModeNames[modalidadActual] || modalidadActual)}</div>
+                    <div class="lore-box">
+                        <div class="quote-text">✨ ${p.lore || "Un alma errante en busca de gloria..."}</div>
+                        <div class="quote-author">${p.frase || "— Sin registrar"}</div>
+                    </div>
+                    <div class="user-images-row">
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/733/733609.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968315.png"></div>
+                        <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998624.png"></div>
+                    </div>
+                `;
+            }
+            card.onclick = () => showDetail(p, position);
+            container.appendChild(card);
+        }
+        if (selectedPlayer && currentData.includes(selectedPlayer)) {
+            const pos = currentData.findIndex(p => p === selectedPlayer) + 1;
+            showDetail(selectedPlayer, pos);
+        } else if (selectedPlayer) {
+            selectedPlayer = null;
+        }
+    }
+
+    function showDetail(p, pos) {
+        selectedPlayer = p;
+        const panel = document.getElementById("panelDetailContent");
+        const rankActual = getPlayerRank(p);
+        const stars = rankActual ? (RANK_SAKURA[rankActual] || "☾") : "🌟";
+        const puntos = getPlayerPoints(p);
+        const rankColorClass = rankActual ? getRankColorClass(rankActual) : "";
+        const pointsColorClass = rankActual ? getPointsColorClass(rankActual) : "points-LY1";
+        
+        let medalEmoji = "";
+        if (pos === 1) medalEmoji = "🥇 ";
+        else if (pos === 2) medalEmoji = "🥈 ";
+        else if (pos === 3) medalEmoji = "🥉 ";
+        
+        const allRanksHtml = currentModalidades.filter(m => m !== "OVERALL").map(m => {
+            const r = p.rangos[m] || "LA5";
+            const info = RANGO_INFO[r];
+            return `<span style="background:#2a1f3a; padding:0.15rem 0.5rem; border-radius:16px; font-size:0.6rem;" class="${getRankColorClass(r)}">${currentModeNames[m] || m}: ${info.simbolo} ${info.nombre}</span>`;
+        }).join(" ");
+        
+        const skinImage = (pos <= 3) ? `https://mc-heads.net/body/${p.nombre}` : p.avatar;
+        const isPodium = (pos <= 3);
+        
+        panel.innerHTML = `
+            <div style="text-align:center;">
+                ${isPodium ? `<img src="${skinImage}" width="120" style="border-radius:16px; margin-bottom:0.5rem; animation: float 3s ease-in-out infinite;">` : `<img src="${skinImage}" width="80" style="border-radius:24px; border:2px solid #FFB7C5;">`}
+                <h3 style="margin:0.4rem 0;">${medalEmoji}${p.nombre}</h3>
+                <p>${p.region}</p>
+                <div style="background:#1f1533cc; border-radius:24px; padding:0.3rem; margin:0.5rem 0;">
+                    <span style="font-size:1.4rem;" class="${rankColorClass}">#${pos}</span><br>${modalidadActual} RANKING
+                </div>
+                <div style="font-size:1.6rem;" class="${pointsColorClass}">🌸 ${puntos} pts</div>
+                <div class="rank-sakura ${rankColorClass}" style="margin:0.3rem;">${stars} ${rankActual || "OVERALL"}</div>
+                <div class="lore-box" style="margin-top:0.8rem;">
+                    <div class="quote-text">📖 ${p.lore || "..."}</div>
+                    <div class="quote-author">💬 ${p.frase || "..."}</div>
+                </div>
+                <hr style="margin:0.6rem 0;">
+                <div style="display:flex; flex-wrap:wrap; gap:4px; justify-content:center;">${allRanksHtml}</div>
+                <div class="user-images-row" style="justify-content:center; margin-top:0.8rem;">
+                    <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1051/1051277.png"></div>
+                    <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/733/733609.png"></div>
+                    <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968315.png"></div>
+                    <div class="user-badge"><img src="https://cdn-icons-png.flaticon.com/512/1998/1998624.png"></div>
+                </div>
+            </div>
+        `;
+        document.getElementById("detailPanel").style.display = "block";
+    }
+
+    function updateAdminSelects() {
+        const edition = document.getElementById("editionSelect").value;
+        let data;
+        if (edition === "java18") data = java18Data;
+        else if (edition === "java19") data = java19Data;
+        else data = bedrockData;
+        
+        const playerSelect = document.getElementById("playerSelect");
+        playerSelect.innerHTML = '<option value="">-- Seleccionar jugador --</option>';
+        data.forEach(p => { playerSelect.innerHTML += `<option value="${p.nombre}">${p.nombre}</option>`; });
+        
+        let modalidadesList;
+        let modeNamesList;
+        if (edition === "java18") {
+            modalidadesList = MODALIDADES_JAVA18;
+            modeNamesList = MODE_NAMES_JAVA18;
+        } else if (edition === "bedrock") {
+            modalidadesList = MODALIDADES_BEDROCK;
+            modeNamesList = MODE_NAMES_BEDROCK;
+        } else {
+            modalidadesList = MODALIDADES_STANDARD;
+            modeNamesList = MODE_NAMES_STANDARD;
+        }
+        
+        const modalidadSelect = document.getElementById("modalidadSelect");
+        modalidadSelect.innerHTML = modalidadesList.map(m => `<option value="${m}">${modeNamesList[m] || m}</option>`).join("");
+        
+        const rangoSelect = document.getElementById("rangoSelect");
+        rangoSelect.innerHTML = Object.keys(RANGO_INFO).map(r => `<option value="${r}">${RANGO_INFO[r].simbolo} ${RANGO_INFO[r].nombre} (${RANGO_INFO[r].puntos} pts)</option>`).join("");
+        
+        const newModalidadSelect = document.getElementById("newModalidadSelect");
+        newModalidadSelect.innerHTML = modalidadesList.map(m => `<option value="${m}">${modeNamesList[m] || m}</option>`).join("");
+        
+        const newRangoSelect = document.getElementById("newRangoSelect");
+        newRangoSelect.innerHTML = Object.keys(RANGO_INFO).map(r => `<option value="${r}">${RANGO_INFO[r].simbolo} ${RANGO_INFO[r].nombre}</option>`).join("");
+        
+        // Cargar datos del perfil seleccionado
+        const selectedPlayerName = playerSelect.value;
+        if (selectedPlayerName) {
+            const player = data.find(p => p.nombre === selectedPlayerName);
+            if (player) {
+                document.getElementById("editLore").value = player.lore || "";
+                document.getElementById("editFrase").value = player.frase || "";
+                document.getElementById("editRegion").value = player.region || "★";
+                document.getElementById("editAvatar").value = player.avatar || "";
+            }
+        }
+    }
+
+    // NUEVA FUNCIÓN: Guardar en Supabase usando upsert
+    async function guardarCambioJugador(jugadorData) {
+        const { data, error } = await supabaseClient
+            .from('tierlist_players')
+            .upsert({
+                nombre: jugadorData.nombre,
+                rangos: jugadorData.rangos,
+                edition: jugadorData.edition,
+                avatar: jugadorData.avatar,
+                region: jugadorData.region,
+                lore: jugadorData.lore || "",
+                frase: jugadorData.frase || ""
+            }, { onConflict: 'nombre, edition' });
+
+        if (error) {
+            console.error("Error guardando en Supabase:", error);
+            alert("¡No se pudo guardar en la nube!");
+            return false;
+        } else {
+            console.log("Cambio guardado en Supabase con éxito.");
+            return true;
+        }
+    }
+
+    // NUEVA FUNCIÓN: Cargar jugadores desde Supabase
+    async function cargarJugadores(edition) {
+        const { data, error } = await supabaseClient
+            .from('tierlist_players')
+            .select('*')
+            .eq('edition', edition);
+
+        if (error) {
+            console.error("Error cargando jugadores desde Supabase:", error);
+            return [];
+        }
+        
+        // Convertir el formato de la DB al formato interno
+        return data.map(player => ({
+            nombre: player.nombre,
+            avatar: player.avatar || `https://mc-heads.net/avatar/${encodeURIComponent(player.nombre)}/100`,
+            region: player.region || "★",
+            edition: player.edition,
+            lore: player.lore || "Un alma errante en busca de gloria...",
+            frase: player.frase || "— Sin registrar",
+            rangos: player.rangos || {}
+        }));
+    }
+
+    // Guardar TODA la data de una edición (actualiza cada jugador individualmente)
+    async function saveEditionToSupabase(edition, playersArray) {
+        for (const player of playersArray) {
+            await guardarCambioJugador({
+                nombre: player.nombre,
+                rangos: player.rangos,
+                edition: edition,
+                avatar: player.avatar,
+                region: player.region,
+                lore: player.lore,
+                frase: player.frase
+            });
+        }
+    }
+
+    // Función para guardar después de cambios locales
+    async function syncToSupabase() {
+        await saveEditionToSupabase("java18", java18Data);
+        await saveEditionToSupabase("java19", java19Data);
+        await saveEditionToSupabase("bedrock", bedrockData);
+    }
+
+    async function savePlayer() {
+        const edition = document.getElementById("editionSelect").value;
+        const playerName = document.getElementById("playerSelect").value;
+        const modalidad = document.getElementById("modalidadSelect").value;
+        const rango = document.getElementById("rangoSelect").value;
+        if (!playerName) { alert("Selecciona un jugador"); return; }
+        
+        let targetData;
+        if (edition === "java18") targetData = java18Data;
+        else if (edition === "java19") targetData = java19Data;
+        else targetData = bedrockData;
+        
+        const player = targetData.find(p => p.nombre === playerName);
+        if (player) { 
+            player.rangos[modalidad] = rango;
+            addToChangeLog(`${playerName}: rango ${modalidad} actualizado a ${rango}`);
+            // Guardar en Supabase
+            await guardarCambioJugador({
+                nombre: player.nombre,
+                rangos: player.rangos,
+                edition: edition,
+                avatar: player.avatar,
+                region: player.region,
+                lore: player.lore,
+                frase: player.frase
+            });
+        }
+        
+        if (currentEdition === edition) renderCards();
+        alert("✅ Guardado en la nube");
+        updateAdminSelects();
+    }
+
+    async function saveProfile() {
+        const edition = document.getElementById("editionSelect").value;
+        const playerName = document.getElementById("playerSelect").value;
+        const lore = document.getElementById("editLore").value;
+        const frase = document.getElementById("editFrase").value;
+        const region = document.getElementById("editRegion").value;
+        const avatar = document.getElementById("editAvatar").value;
+        
+        if (!playerName) { alert("Selecciona un jugador"); return; }
+        
+        let targetData;
+        if (edition === "java18") targetData = java18Data;
+        else if (edition === "java19") targetData = java19Data;
+        else targetData = bedrockData;
+        
+        const player = targetData.find(p => p.nombre === playerName);
+        if (player) {
+            if (lore) player.lore = lore;
+            if (frase) player.frase = frase;
+            if (region) player.region = region;
+            if (avatar) player.avatar = avatar;
+            addToChangeLog(`${playerName}: perfil actualizado`);
+            // Guardar en Supabase
+            await guardarCambioJugador({
+                nombre: player.nombre,
+                rangos: player.rangos,
+                edition: edition,
+                avatar: player.avatar,
+                region: player.region,
+                lore: player.lore,
+                frase: player.frase
+            });
+        }
+        
+        if (currentEdition === edition) renderCards();
+        alert("✅ Perfil guardado en la nube");
+    }
+
+    async function resetPlayer() {
+        const edition = document.getElementById("editionSelect").value;
+        const playerName = document.getElementById("playerSelect").value;
+        if (!playerName) { alert("Selecciona un jugador"); return; }
+        if (!confirm(`Resetear a ${playerName}? Pondrá TODOS sus rangos en LA5.`)) return;
+        
+        let targetData;
+        if (edition === "java18") targetData = java18Data;
+        else if (edition === "java19") targetData = java19Data;
+        else targetData = bedrockData;
+        
+        const player = targetData.find(p => p.nombre === playerName);
+        if (player) {
+            let modalidades;
+            if (edition === "java18") modalidades = MODALIDADES_JAVA18;
+            else if (edition === "bedrock") modalidades = MODALIDADES_BEDROCK;
+            else modalidades = MODALIDADES_STANDARD;
+            modalidades.forEach(m => { player.rangos[m] = "LA5"; });
+            addToChangeLog(`${playerName}: reset completo a LA5`);
+            // Guardar en Supabase
+            await guardarCambioJugador({
+                nombre: player.nombre,
+                rangos: player.rangos,
+                edition: edition,
+                avatar: player.avatar,
+                region: player.region,
+                lore: player.lore,
+                frase: player.frase
+            });
+        }
+        
+        if (currentEdition === edition) renderCards();
+        alert("✅ Reseteado");
+        updateAdminSelects();
+    }
+
+    async function deletePlayer() {
+        const edition = document.getElementById("editionSelect").value;
+        const playerName = document.getElementById("playerSelect").value;
+        if (!playerName) { alert("Selecciona un jugador"); return; }
+        if (!confirm(`¿Eliminar a ${playerName}?`)) return;
+        
+        // Eliminar de Supabase
+        const { error } = await supabaseClient
+            .from('tierlist_players')
+            .delete()
+            .eq('nombre', playerName)
+            .eq('edition', edition);
+            
+        if (error) {
+            console.error("Error eliminando:", error);
+            alert("Error al eliminar de la base de datos");
+            return;
+        }
+        
+        let targetData;
+        if (edition === "java18") targetData = java18Data;
+        else if (edition === "java19") targetData = java19Data;
+        else targetData = bedrockData;
+        
+        const index = targetData.findIndex(p => p.nombre === playerName);
+        if (index !== -1) {
+            targetData.splice(index, 1);
+            addToChangeLog(`${playerName}: eliminado`);
+        }
+        
+        if (currentEdition === edition) {
+            if (selectedPlayer && selectedPlayer.nombre === playerName) {
+                selectedPlayer = null;
+                document.getElementById("detailPanel").style.display = "none";
+            }
+            renderCards();
+        }
+        updateAdminSelects();
+        alert("✅ Eliminado de la nube");
+    }
+
+    async function createPlayer() {
+        const edition = document.getElementById("createEditionSelect").value;
+        const name = document.getElementById("newPlayerName").value.trim();
+        const lore = document.getElementById("newPlayerLore").value.trim() || "Un nuevo guerrero en el camino";
+        const frase = document.getElementById("newPlayerFrase").value.trim() || "«Aún no hay frases registradas»";
+        const region = document.getElementById("newPlayerRegion").value.trim() || "★";
+        const modalidad = document.getElementById("newModalidadSelect").value;
+        const rango = document.getElementById("newRangoSelect").value;
+        
+        if (!name) { alert("Escribe un nombre"); return; }
+        
+        let targetData;
+        let modalidadesList;
+        if (edition === "java18") {
+            targetData = java18Data;
+            modalidadesList = MODALIDADES_JAVA18;
+        } else if (edition === "bedrock") {
+            targetData = bedrockData;
+            modalidadesList = MODALIDADES_BEDROCK;
+        } else {
+            targetData = java19Data;
+            modalidadesList = MODALIDADES_STANDARD;
+        }
+        
+        if (targetData.find(p => p.nombre === name)) { alert("El jugador ya existe"); return; }
+        
+        const rangosIniciales = {};
+        modalidadesList.forEach(m => { rangosIniciales[m] = "LA5"; });
+        rangosIniciales[modalidad] = rango;
+        
+        const newPlayer = {
+            nombre: name,
+            avatar: `https://mc-heads.net/avatar/${encodeURIComponent(name)}/100`,
+            region: region,
+            edition: edition,
+            lore: lore,
+            frase: frase,
+            rangos: rangosIniciales
+        };
+        
+        targetData.push(newPlayer);
+        
+        // Guardar en Supabase
+        await guardarCambioJugador({
+            nombre: newPlayer.nombre,
+            rangos: newPlayer.rangos,
+            edition: edition,
+            avatar: newPlayer.avatar,
+            region: newPlayer.region,
+            lore: newPlayer.lore,
+            frase: newPlayer.frase
+        });
+        
+        if (currentEdition === edition) renderCards();
+        
+        addToChangeLog(`${name}: creado en ${edition}`);
+        document.getElementById("newPlayerName").value = "";
+        document.getElementById("newPlayerLore").value = "";
+        document.getElementById("newPlayerFrase").value = "";
+        alert("✅ Creado en la nube");
+        updateAdminSelects();
+    }
+
+    function addToChangeLog(message) {
+        const timestamp = new Date().toLocaleString();
+        changeLog.unshift(`[${timestamp}] ${message}`);
+        if (changeLog.length > 50) changeLog.pop();
+        updateChangeLogDisplay();
+    }
+
+    function updateChangeLogDisplay() {
+        const logDiv = document.getElementById("changeLog");
+        if (logDiv) {
+            if (changeLog.length === 0) {
+                logDiv.innerHTML = "No hay cambios registrados aún";
+            } else {
+                logDiv.innerHTML = changeLog.map(log => `<div style="border-bottom: 1px solid #333; padding: 4px 0;">${log}</div>`).join("");
+            }
+        }
+    }
+
+    function exportData() {
+        const allData = {
+            java18: java18Data,
+            java19: java19Data,
+            bedrock: bedrockData,
+            exportedAt: new Date().toISOString()
+        };
+        const dataStr = JSON.stringify(allData, null, 2);
+        const blob = new Blob([dataStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `lynstierlist_backup_${new Date().toISOString().slice(0,19)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        alert("✅ Datos exportados");
+    }
+
+    function importData(file) {
+        const reader = new FileReader();
+        reader.onload = async function(e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                if (data.java18) {
+                    java18Data = data.java18;
+                    await saveEditionToSupabase("java18", java18Data);
+                }
+                if (data.java19) {
+                    java19Data = data.java19;
+                    await saveEditionToSupabase("java19", java19Data);
+                }
+                if (data.bedrock) {
+                    bedrockData = data.bedrock;
+                    await saveEditionToSupabase("bedrock", bedrockData);
+                }
+                if (currentEdition === "java18") currentData = java18Data;
+                else if (currentEdition === "java19") currentData = java19Data;
+                else currentData = bedrockData;
+                renderCards();
+                alert("✅ Datos importados a la nube");
+                updateAdminSelects();
+            } catch(e) { alert("Error al importar: archivo inválido"); }
+        };
+        reader.readAsText(file);
+    }
+
+    function updateStats() {
+        const statsHtml = `
+            <div class="stat-card"><div class="stat-number">${java18Data.length}</div><div>Java 1.8</div></div>
+            <div class="stat-card"><div class="stat-number">${java19Data.length}</div><div>Java 1.9+</div></div>
+            <div class="stat-card"><div class="stat-number">${bedrockData.length}</div><div>Bedrock</div></div>
+            <div class="stat-card"><div class="stat-number">${java18Data.length + java19Data.length + bedrockData.length}</div><div>Total Jugadores</div></div>
+        `;
+        document.getElementById("statsGrid").innerHTML = statsHtml;
+    }
+
+    async function loadAllData() {
+        // Cargar desde Supabase
+        java18Data = await cargarJugadores("java18");
+        java19Data = await cargarJugadores("java19");
+        bedrockData = await cargarJugadores("bedrock");
+        
+        // Añadir jugador de prueba si la edición está vacía
+        if (java18Data.length === 0) {
+            const testPlayer = { ...TEST_PLAYER, edition: "java18" };
+            java18Data.push(testPlayer);
+            await guardarCambioJugador({
+                nombre: testPlayer.nombre,
+                rangos: testPlayer.rangos,
+                edition: "java18",
+                avatar: testPlayer.avatar,
+                region: testPlayer.region,
+                lore: testPlayer.lore,
+                frase: testPlayer.frase
+            });
+        }
+        if (bedrockData.length === 0) {
+            const testPlayer = { 
+                ...TEST_PLAYER, 
+                edition: "bedrock", 
+                rangos: {
+                    OVERALL: "LY1", Boxing: "LY2", NoDebuff: "LY3", Sumo: "LY4",
+                    "The Bridge": "LY5", Gapple: "LA1", BuildUHC: "LA2", Midfight: "LA3", Combo: "LA4"
+                }
+            };
+            bedrockData.push(testPlayer);
+            await guardarCambioJugador({
+                nombre: testPlayer.nombre,
+                rangos: testPlayer.rangos,
+                edition: "bedrock",
+                avatar: testPlayer.avatar,
+                region: testPlayer.region,
+                lore: testPlayer.lore,
+                frase: testPlayer.frase
+            });
+        }
+        
+        updateCurrentData();
+        renderCards();
+        updateStats();
+    }
+
+    function updateCurrentData() {
+        if (currentEdition === "java18") currentData = java18Data;
+        else if (currentEdition === "java19") currentData = java19Data;
+        else currentData = bedrockData;
+    }
+
+    function switchEdition(edition) {
+        currentEdition = edition;
+        updateCurrentData();
+        updateModesByEdition(edition);
+        selectedPlayer = null;
+        renderCards();
+        document.getElementById("detailPanel").style.display = "none";
+        document.querySelectorAll(".edition-btn").forEach(btn => btn.classList.remove("active"));
+        document.querySelector(`.edition-btn[data-edition="${edition}"]`).classList.add("active");
+        updateStats();
+    }
+
+    function loadModes() {
+        const bar = document.getElementById("modesBar");
+        bar.innerHTML = "";
+        currentModalidades.forEach(m => {
+            const gem = document.createElement("div");
+            gem.className = `gem ${m === modalidadActual ? "active" : ""}`;
+            gem.innerText = currentModeNames[m] || m;
+            gem.onclick = () => {
+                modalidadActual = m;
+                document.querySelectorAll(".gem").forEach(g => g.classList.remove("active"));
+                gem.classList.add("active");
+                renderCards();
+                if (selectedPlayer && currentData.includes(selectedPlayer)) {
+                    const pos = currentData.findIndex(p => p === selectedPlayer) + 1;
+                    showDetail(selectedPlayer, pos);
+                }
+            };
+            bar.appendChild(gem);
+        });
+    }
+
+    function setupSearch() {
+        const input = document.getElementById("searchInput");
+        input.addEventListener("input", (e) => {
+            const term = e.target.value.toLowerCase();
+            const cards = document.querySelectorAll(".crystal-card");
+            cards.forEach(card => {
+                const nameDiv = card.querySelector("div[style*='font-weight:bold']");
+                if (nameDiv) {
+                    const name = nameDiv.innerText.toLowerCase();
+                    card.style.display = name.includes(term) ? "" : "none";
+                }
+            });
+        });
+    }
+
+    function createPetals() {
+        const bg = document.getElementById("sakuraBg");
+        for (let i = 0; i < 100; i++) {
+            const petal = document.createElement("div");
+            petal.classList.add("petal");
+            petal.style.left = Math.random() * 100 + "%";
+            petal.style.width = Math.random() * 10 + 6 + "px";
+            petal.style.height = petal.style.width;
+            petal.style.animationDuration = Math.random() * 6 + 4 + "s";
+            petal.style.animationDelay = Math.random() * 10 + "s";
+            bg.appendChild(petal);
+        }
+    }
+
+    function checkSecretCode(input) {
+        secretCodeBuffer += input;
+        if (secretCodeBuffer.length > 10) secretCodeBuffer = secretCodeBuffer.slice(-10);
+        if (secretCodeBuffer === "ADMLY") {
+            secretCodeBuffer = "";
+            isAdmin = true;
+            document.getElementById("adminModal").style.display = "flex";
+            
+            const container = document.getElementById("adminButtonContainer");
+            const adminBtn = document.createElement("button");
+            adminBtn.className = "admin-visible-btn";
+            adminBtn.innerHTML = "🔧 ADMIN";
+            adminBtn.onclick = () => document.getElementById("adminModal").style.display = "flex";
+            container.innerHTML = "";
+            container.appendChild(adminBtn);
+            
+            alert("✅ Modo admin activado");
+            return true;
+        }
+        return false;
+    }
+
+    // Admin tabs
+    function setupAdminTabs() {
+        const tabs = document.querySelectorAll(".admin-tab");
+        tabs.forEach(tab => {
+            tab.onclick = () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                document.querySelectorAll(".admin-tab-content").forEach(content => {
+                    content.style.display = "none";
+                });
+                document.getElementById(`tab-${tab.getAttribute("data-tab")}`).style.display = "block";
+            };
+        });
+    }
+
+    async function init() {
+        createPetals();
+        await loadAllData();
+        updateModesByEdition(currentEdition);
+        setupSearch();
+        setupAdminTabs();
+        
+        document.getElementById("discordBtn").onclick = () => window.open("https://discord.gg/KQ6Fjma2W7", "_blank");
+        document.getElementById("donateBtn").onclick = () => window.open("https://www.paypal.me/LynsServer", "_blank");
+        document.getElementById("closePanelBtn").onclick = () => document.getElementById("detailPanel").style.display = "none";
+        document.getElementById("closeModal").onclick = () => document.getElementById("adminModal").style.display = "none";
+        
+        document.querySelectorAll(".edition-btn").forEach(btn => {
+            btn.onclick = () => switchEdition(btn.getAttribute("data-edition"));
+        });
+        
+        document.getElementById("saveBtn").onclick = savePlayer;
+        document.getElementById("saveProfileBtn").onclick = saveProfile;
+        document.getElementById("resetPlayerBtn").onclick = resetPlayer;
+        document.getElementById("deleteBtn").onclick = deletePlayer;
+        document.getElementById("confirmCreateBtn").onclick = createPlayer;
+        document.getElementById("editionSelect").onchange = updateAdminSelects;
+        document.getElementById("playerSelect").onchange = updateAdminSelects;
+        
+        // Funciones avanzadas
+        document.getElementById("exportDataBtn").onclick = exportData;
+        document.getElementById("importDataBtn").onclick = () => document.getElementById("importFile").click();
+        document.getElementById("importFile").onchange = (e) => {
+            if (e.target.files[0]) importData(e.target.files[0]);
+            e.target.value = "";
+        };
+        document.getElementById("backupDataBtn").onclick = () => {
+            localStorage.setItem("lynstierlist_backup", JSON.stringify({ java18: java18Data, java19: java19Data, bedrock: bedrockData }));
+            alert("✅ Backup guardado en el navegador");
+        };
+        document.getElementById("restoreBackupBtn").onclick = async () => {
+            const backup = localStorage.getItem("lynstierlist_backup");
+            if (backup) {
+                const data = JSON.parse(backup);
+                if (data.java18) {
+                    java18Data = data.java18;
+                    await saveEditionToSupabase("java18", java18Data);
+                }
+                if (data.java19) {
+                    java19Data = data.java19;
+                    await saveEditionToSupabase("java19", java19Data);
+                }
+                if (data.bedrock) {
+                    bedrockData = data.bedrock;
+                    await saveEditionToSupabase("bedrock", bedrockData);
+                }
+                renderCards();
+                alert("✅ Backup restaurado");
+            } else { alert("No hay backup guardado"); }
+        };
+        
+        const searchBox = document.getElementById("searchInput");
+        searchBox.addEventListener("input", (e) => checkSecretCode(e.target.value));
+        
+        const hiddenBtn = document.getElementById("hiddenAdminBtn");
+        let clickCount = 0, clickTimer = null;
+        hiddenBtn.onclick = () => {
+            clickCount++;
+            if (clickTimer) clearTimeout(clickTimer);
+            clickTimer = setTimeout(() => clickCount = 0, 1000);
+            if (clickCount >= 3) {
+                clickCount = 0;
+                isAdmin = true;
+                document.getElementById("adminModal").style.display = "flex";
+                const container = document.getElementById("adminButtonContainer");
+                const adminBtn = document.createElement("button");
+                adminBtn.className = "admin-visible-btn";
+                adminBtn.innerHTML = "🔧 ADMIN";
+                adminBtn.onclick = () => document.getElementById("adminModal").style.display = "flex";
+                container.innerHTML = "";
+                container.appendChild(adminBtn);
+                alert("✅ Modo admin activado");
+            }
+        };
+    }
+    
+    init();
+</script>
+</body>
+</html>
